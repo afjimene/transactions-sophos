@@ -229,7 +229,7 @@ public class TransactionSophos   {
   @Schema(description = "")
   
     public String getTransactionType() {
-    return transactionType;
+      return transactionType == null ? "VACIO" : transactionType;
   }
 
   public void setTransactionType(String transactionType) {

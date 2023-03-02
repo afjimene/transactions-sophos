@@ -6,6 +6,7 @@
 package com.sophosbank.transactions.api;
 
 import com.sophosbank.transactions.model.FilterRequest;
+import com.sophosbank.transactions.model.TransactionGroup;
 import com.sophosbank.transactions.model.TransactionSophos;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -23,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.math.BigDecimal;
 import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-02-08T15:16:09.096075-05:00[America/Bogota]")
@@ -67,5 +67,15 @@ public interface TransactionsApi {
             consumes = { "application/json" },
             method = RequestMethod.POST)
     ResponseEntity<List<TransactionSophos>> transactionsPostFilter(@Parameter(in = ParameterIn.DEFAULT, description = "", schema=@Schema()) @Valid @RequestBody FilterRequest body);
+
+    @Operation(summary = "Group transactions", description = "Group ", tags={ "developers" })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "group", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = TransactionGroup.class)))),
+
+            @ApiResponse(responseCode = "400", description = "bad input parameter") })
+    @RequestMapping(value = "/transactions/v1/group",
+            produces = { "application/json" },
+            method = RequestMethod.GET)
+    ResponseEntity<List<TransactionGroup>> transactionsGroup();
 }
 

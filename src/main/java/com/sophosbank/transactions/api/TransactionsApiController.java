@@ -1,20 +1,17 @@
 package com.sophosbank.transactions.api;
 
 import com.sophosbank.transactions.model.FilterRequest;
+import com.sophosbank.transactions.model.TransactionGroup;
 import com.sophosbank.transactions.model.TransactionSophos;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sophosbank.transactions.service.TransactionsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-02-08T15:16:09.096075-05:00[America/Bogota]")
 @RestController
@@ -60,6 +57,11 @@ public class TransactionsApiController implements TransactionsApi {
     public ResponseEntity<List<TransactionSophos>> transactionsPostFilter(FilterRequest body) {
         //Double amount = Optional.ofNullable(body.getTransactionAmount()).orElse(new BigDecimal(0.0)).doubleValue();
         return service.getTransactionsByFilter(body.getTransactionType(), body.getTransactionAmount(), body.getCounterpartyName());
+    }
+
+    @Override
+    public ResponseEntity<List<TransactionGroup>> transactionsGroup() {
+        return service.getTransactionsGroup();
     }
 
 }
